@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .center {
+      position: absolute;
+      top: 30%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  </style>
+</head>
+<body>
+  <div class="center">
+    <button id="btn">位置を取得</button>
+    <p>緯度：<span id="latitude"></span></p>
+    <p>経度：<span id="longitude"></span></p>
+  </div>
+</body>
+<script>
+  const btn = document.getElementById('btn');
+  const latitude_el = document.getElementById('latitude');
+  const longitude_el = document.getElementById('longitude');
+
+  btn.addEventListener('click', () => {
+    navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+  });
+
+  function successCallback(position) {
+    const latitude = position.coords.latitude;
+    latitude_el.textContent = latitude;
+    const longitude = position.coords.longitude;
+    longitude_el.textContent = longitude;
+  }
+
+  function errorCallback(error) {
+    alert("位置情報が取得できませんでした");
+  }
+</script>
+</html>
